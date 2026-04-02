@@ -29,6 +29,19 @@
         color: var(--text-dark);
         overflow-x: hidden;
         line-height: 1.6;
+        position: relative;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10 Q60 30 80 30 Q60 30 60 50 Q60 70 80 70 Q60 70 50 90 Q40 70 20 70 Q40 70 40 50 Q40 30 20 30 Q40 30 50 10' fill='none' stroke='%23D4AF37' stroke-width='0.2' opacity='0.1'/%3E%3C/svg%3E");
+        z-index: -1;
+        pointer-events: none;
       }
 
       h1, h2, h3, .serif {
@@ -157,8 +170,46 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background: linear-gradient(to bottom, rgba(253, 251, 247, 0.85), rgba(253, 251, 247, 0.7)), url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat;
+        background-color: var(--beige);
+        background-image: 
+          radial-gradient(circle, rgba(253, 251, 247, 0.4) 0%, rgba(253, 251, 247, 0.9) 100%),
+          url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10 Q60 30 80 30 Q60 30 60 50 Q60 70 80 70 Q60 70 50 90 Q40 70 20 70 Q40 70 40 50 Q40 30 20 30 Q40 30 50 10' fill='none' stroke='%23D4AF37' stroke-width='0.5' opacity='0.2'/%3E%3C/svg%3E");
+        background-repeat: repeat;
         border-bottom: 3px double var(--gold);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before, .hero::after {
+        content: '';
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10 Q60 30 80 30 Q60 30 60 50 Q60 70 80 70 Q60 70 50 90 Q40 70 20 70 Q40 70 40 50 Q40 30 20 30 Q40 30 50 10' fill='none' stroke='%23D4AF37' stroke-width='1'/%3E%3C/svg%3E");
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 0.1;
+        z-index: 0;
+      }
+
+      .hero::before { top: -50px; left: -50px; transform: rotate(-15deg); }
+      .hero::after { bottom: -50px; right: -50px; transform: rotate(165deg); }
+
+      .hero-ornament {
+        width: 250px;
+        height: 250px;
+        margin-bottom: 30px;
+        opacity: 0.9;
+        animation: rotateSlow 40s linear infinite;
+        z-index: 1;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10 Q60 30 80 30 Q60 30 60 50 Q60 70 80 70 Q60 70 50 90 Q40 70 20 70 Q40 70 40 50 Q40 30 20 30 Q40 30 50 10 M50 20 Q55 35 70 35 Q55 35 55 50 Q55 65 70 65 Q55 65 50 80 Q45 65 30 65 Q45 65 45 50 Q45 35 30 35 Q45 35 50 20' fill='none' stroke='%23D4AF37' stroke-width='1'/%3E%3C/svg%3E");
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      @keyframes rotateSlow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
       }
 
       .hero h1 {
@@ -181,8 +232,23 @@
         margin: 40px auto;
         border-radius: 30px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        border: 1px solid var(--gold-light);
+        border: 4px double var(--gold-light);
+        position: relative;
+        padding-top: 40px;
       }
+
+      .greeting::before, .greeting::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 20px;
+        background-image: url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 Q10 0 20 10 Q30 20 40 10' fill='none' stroke='%23D4AF37' stroke-width='1'/%3E%3C/svg%3E");
+        background-repeat: repeat-x;
+      }
+
+      .greeting::before { top: 10px; }
+      .greeting::after { bottom: 10px; transform: rotate(180deg); }
 
       .guest-name-highlight {
         color: var(--gold);
@@ -231,6 +297,15 @@
       }
 
       /* Timer */
+      .countdown {
+        border: 2px solid var(--gold-light);
+        border-radius: 30px;
+        margin: 40px auto;
+        padding: 40px 20px;
+        background: rgba(255, 255, 255, 0.6);
+        max-width: 800px;
+      }
+
       .timer-container {
         display: flex;
         justify-content: center;
@@ -327,9 +402,7 @@
     <!-- Main Content -->
     <div id="main-content">
       <section class="hero">
-        <svg class="ornament" viewBox="0 0 100 100">
-          <path d="M50 10 Q60 30 80 30 Q60 30 60 50 Q60 70 80 70 Q60 70 50 90 Q40 70 20 70 Q40 70 40 50 Q40 30 20 30 Q40 30 50 10" />
-        </svg>
+        <div class="hero-ornament"></div>
         <h1 class="serif">Ақботаның 18 жас мерейтойы <br>&<br> Рахимнің 1 жас тұсау кесері</h1>
         <p>Салтанатты кешке шақыру</p>
       </section>
@@ -381,7 +454,7 @@
 
     <button id="music-toggle">🎵</button>
     <audio id="bg-music" loop>
-      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
     </audio>
 
     <script>
